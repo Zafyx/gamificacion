@@ -11,5 +11,10 @@ module.exports = function(Juego) {
       // TODO
       callback(null, nombre);
     };
-
+    Juego.beforeRemote('create', function(ctx, user, next) {
+    
+    context.args.data.creador = ctx.req.accessToken.userId;
+    next();
+  });
+    
 };
