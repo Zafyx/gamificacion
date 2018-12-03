@@ -1,0 +1,99 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models",
+      "../node_modules/loopback-component-passport/lib/models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "db"
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Juego": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Grupo": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Prueba": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Usuario": {
+    "dataSource": "db",
+    "public": true,
+    "options": {
+      "emailVerificationRequired": true
+    }
+  },
+  "Marcador": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Miembro": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Imagen": {
+    "dataSource": "db",
+    "public": true
+  },
+  "ApplicationCredential": {
+    "dataSource": "db",
+    "public": true
+  },
+  "UserCredential": {
+    "dataSource": "db",
+    "public": true,
+    "relations": {
+      "user": {
+        "type": "belongsTo",
+        "model": "Usuario",
+        "foreignKey": "userId"
+      }
+    }
+  },
+  "UserIdentity": {
+    "dataSource": "db",
+    "public": true,
+    "relations": {
+      "user": {
+        "type": "belongsTo",
+        "model": "Usuario",
+        "foreignKey": "userId"
+      }
+    }
+  },
+  "Email": {
+    "dataSource": "Email"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "name": "Usuario",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "coordinaciones": {
+      "type": "hasAndBelongsToMany",
+      "model": "Juego",
+      "foreignKey": ""
+    },
+    "juegos": {
+      "type": "hasMany",
+      "model": "Juego",
+      "foreignKey": "creador"
+    },
+    "grupos": {
+      "type": "hasMany",
+      "model": "Grupo",
+      "foreignKey": "",
+      "through": "Miembro",
+      "scope": {
+        "where": {
+          "validado": true
+        },
+        "include": "grupo"
+      }
+    },
+    "avatar": {
+      "type": "hasOne",
+      "model": "Imagen",
+      "polymorphic": {
+        "foreignKey": "imageableId",
+        "discriminator": "imageableType"
+      }
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__get__grupos"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

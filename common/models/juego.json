@@ -1,0 +1,85 @@
+{
+  "name": "Juego",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
+    "descripcion": {
+      "type": "string"
+    },
+    "grupal": {
+      "type": "boolean"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "coordinadores": {
+      "type": "hasAndBelongsToMany",
+      "model": "Usuario",
+      "foreignKey": ""
+    },
+    "ownerId": {
+      "type": "belongsTo",
+      "model": "Usuario",
+      "foreignKey": "creador"
+    },
+    "pruebas": {
+      "type": "hasMany",
+      "model": "Prueba",
+      "foreignKey": ""
+    },
+    "grupos": {
+      "type": "hasMany",
+      "model": "Grupo",
+      "foreignKey": ""
+    },
+    "imagen": {
+      "type": "hasOne",
+      "model": "Imagen",
+      "polymorphic": {
+        "foreignKey": "imageableId",
+        "discriminator": "imageableType"
+      }
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "create"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}
